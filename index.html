@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Agenda de Contatos</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
+    <link rel="icon" href="img.ico">
+    <!-- Link Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&family=Roboto:wght@300;500&display=swap"
+        rel="stylesheet">
+    <!-- Link Vue.js -->
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <div class="container">
+            <div class="Agenda-vazia">
+                <div class="bg_header">
+                    <img src="img/ic-logo.svg" class="ic_logo">
+                    <div class="busca_field">
+                        <span class="Buscar Text-Style-2">Buscar...</span>
+                        <img src="img/ic-search.svg" class="ic_search">
+                    </div>
+                </div>
+
+                <div class="agenda">
+                    <img src="img/ic-book.svg" class="ic_book">
+                    <span class="Nenhum-contato-foi-c Text-Style">Nenhum contato foi criado ainda.</span>
+                    <div class="Rectangle">
+                        <img src="img/ic-plus.svg" class="ic_plus">
+                        <a href="#create"> <span class="Criar-contato Text-Style-3">Criar contato</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Início Modal Criar Contato -->
+        <div class="container-criar" id="create">
+            <div class="Criar-contato---Em-branco">
+                <div class="bg_modal">
+                    <span class="Criar-novo-contato">Criar novo contato</span>
+
+                    <div class="divisor"></div>
+
+                    <span class="Nome">Nome</span>
+                    <div class="text_field.">
+                        <input class="text_field" v-model="nomeInput">
+                    </div>
+
+                    <span class="E-mail">E-mail</span>
+                    <div class="text_field.">
+                        <input class="text_field" v-model="emailInput">
+                    </div>
+
+                    <span class="Telefone">Telefone</span>
+                    <div class="text_field_t">
+                        <input class="text_field" v-model="foneInput">
+                    </div>
+
+                    <div class="divisor"> </div>
+
+                    <span class="Cancelar"> Cancelar</span>
+                    <div class="Rectangle-Copy_old">
+                        <span class="Salvar">Salvar</span>
+                    </div>
+                    <div class="Rectangle-Copy" v-if="nomePronto" @click="add">
+                       <a href="#contato_criado" class="Salvar"> Salvar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fim Modal Criar Contato -->
+
+
+        <!--Início Modal excluir  -->
+        <div class="Rectangle-exc" v-if="showModal">
+            <div class="bg_modal_exc">
+                <span class="Excluir-contato">Excluir contato</span>
+
+                <div class="divisor"></div>
+
+                <span class="Deseja-realmente-exc"> Deseja realmente excluir o contato?</span>
+
+                <div class="divisor_exc"></div>
+
+                <div class="Rectangle-Copy-Exc">
+                    <span class="Cancelar_Exc" @click="toggleModal">Cancelar</span>
+                    <span class="Excluir" @click="remove">Excluir</span>
+                </div>
+
+            </div>
+        </div>
+        <!-- Fim Modal excluir  -->
+
+
+
+        <!-- Início de LISTA DE CONTATOS -->
+        <div class="Contato-criado-com-sucesso" id="contato_criado">
+            <div class="bg_header_list"> 
+                <img src="img/ic-logo.svg" class="ic_logo_contact">
+                <div class="Rectangle_contact">
+                    <img src="img/ic-plus.svg" class="ic_plus">
+                    <a href="#create"> <span class="Criar-contato Text-Style-3">Criar contato</span></a>
+                </div>
+
+                <div class="busca_field_contact">
+                    <span class="Buscar Text-Style-2">Buscar...</span>
+                    <img src="img/ic-search.svg" class="ic_search">
+                </div>
+
+            </div>
+
+            <div class="Rectangle-header">
+                <span class="Contatos">Contatos</span>
+                <span class="E-mail_contact">E-mail</span>
+                <span class="Telefone_contact">Telefone</span>
+            </div>
+
+            <div class="Rectangle-create" >
+                <img src="img/ic-edit.svg" class="ic_edit_name">
+                <img src="img/ic-delete.svg" class="ic_delete">
+             
+            </div>
+
+            <div class="Rectangle-old">
+                <div class="Oval">
+                    <a>A</a>
+                    <span class="Alana" v-for="(item, index) in lista" > {{ item.nomeInput }}</span>                    
+                    <span class="alanamailcom" v-for="(item, index) in lista"> {{ item.emailInput }}</span>
+                    <span class="number" v-for="(item, index) in lista"> {{ item.foneInput }}</span>                   
+
+                    <img src="img/ic-edit.svg" alt="edit icon" class="ic_edit">
+                    <img src="img/ic-delete.svg" alt="delete icon" class="ic_delete" @click="toggleModal(index)">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Fim de LISTA DE CONTATOS -->
+
+        <!-- {{ totalTexto }} -->
+
+    </div>
+
+<script src='vue/script.vue'></script>
+</body>
+
+</html>
